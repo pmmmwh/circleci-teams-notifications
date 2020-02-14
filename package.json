@@ -1,0 +1,36 @@
+{
+  "name": "circleci-teams-notifications",
+  "description": "A serverless service to stream CircleCI workflow notifications for Slack to a Microsoft Teams incoming webhook.",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "dependencies": {
+    "got": "^10.5.5",
+    "he": "^1.2.0",
+    "markdown-escapes": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/he": "^1.1.0",
+    "@types/serverless": "^1.18.4",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "serverless": "^1.63.0",
+    "serverless-dotenv-plugin": "^2.3.2",
+    "serverless-offline": "^6.0.0-alpha.66",
+    "serverless-plugin-common-excludes": "^3.0.0",
+    "serverless-plugin-include-dependencies": "^4.0.1",
+    "serverless-plugin-typescript": "^1.1.9",
+    "typescript": "^3.7.5"
+  },
+  "scripts": {
+    "dev": "nodemon --exec serverless offline",
+    "serverless": "serverless",
+    "format": "prettier --write \"**/*.{js,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md,yml,yaml}\""
+  },
+  "author": "Michael Mok",
+  "license": "MIT",
+  "nodemonConfig": {
+    "exec": "ts-node ./src/index.ts",
+    "ext": "ts"
+  }
+}

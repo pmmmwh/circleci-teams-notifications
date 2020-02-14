@@ -1,0 +1,13 @@
+# package directories
+node_modules
+
+# Serverless directories
+.build
+.serverless
+
+# editor files
+.idea
+.vscode
+
+# environment variables
+.env

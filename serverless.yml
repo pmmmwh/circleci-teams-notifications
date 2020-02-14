@@ -1,0 +1,46 @@
+service: circleci-teams-notifications
+
+# app and org for use with `dashboard.serverless.com`
+# app: your-app-name
+# org: your-org-name
+
+frameworkVersion: ^1.63.0
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-plugin-typescript
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
+  - serverless-offline
+
+custom:
+  dotenv:
+    exclude:
+      # Opt out of auto-injection to consume SSM parameters
+      - WEBHOOK_URL
+  prod:
+    WEBHOOK_URL: ${ssm:/${self:service}/WEBHOOK_URL~true}
+  dev:
+    WEBHOOK_URL: ${env:WEBHOOK_URL}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-southeast-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    WEBHOOK_URL: ${self:custom.${self:provider.stage}.WEBHOOK_URL}
+
+package:
+  exclude:
+    # Serverless-plugin-common-excludes does not exclude the files listed below,
+    # so we have to exclude them manually.
+    - .prettierrc.json
+
+functions:
+  notify:
+    handler: handler.notify
+    events:
+      - http:
+          method: POST
+          path: notify
