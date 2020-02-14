@@ -36,6 +36,7 @@ package:
     # Serverless-plugin-common-excludes does not exclude the files listed below,
     # so we have to exclude them manually.
     - .prettierrc.json
+    - .prettierignore
 
 functions:
   notify:
