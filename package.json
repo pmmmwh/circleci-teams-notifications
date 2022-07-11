@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "handler.js",
   "dependencies": {
-    "got": "^10.5.5",
+    "got": "^11.8.5",
     "he": "^1.2.0",
     "markdown-escapes": "^1.0.4"
   },
